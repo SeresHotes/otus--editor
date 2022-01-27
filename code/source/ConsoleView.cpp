@@ -83,23 +83,17 @@ namespace editor {
                 } catch ([[maybe_unused]] const std::invalid_argument& e) {
                 } catch ([[maybe_unused]] const std::out_of_range& e) {
                 }
-                if (is_number_ok && (number < 1 || number > size)) {
+                if (is_number_ok && (number < 1 || (size_t)number > size)) {
                     is_number_ok = false;
                 }
 
                 if (!is_number_ok) {
                     view.errorMessage(std::string("you should write number between 1 and ") + std::to_string(size));
                 } else {
-                    model.removePrimitive(*index_to_primitives[number - 1]);
+                    model.removePrimitive(*index_to_primitives[(size_t)number - 1]);
                 }
 
                 
-            }
-            int index;
-            sstream >> index;
-            if (index <= index_to_primitives.size() && index >= 1) {
-                index--;
-                model.removePrimitive(*index_to_primitives[index]);
             }
         }
         view.updateMenu(state);

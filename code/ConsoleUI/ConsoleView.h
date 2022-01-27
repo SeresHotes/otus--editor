@@ -18,6 +18,7 @@ namespace editor {
 
     class IConsoleView {
     public:
+        virtual ~IConsoleView() = default;
         virtual void messageAddPrimitive(const Primitive& primitive) = 0;
         virtual void messageRemovePrimitive() = 0;
         virtual void printPrimitiveWithIndex(int index, const Primitive& primitive) = 0;

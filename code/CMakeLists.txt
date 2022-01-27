@@ -19,8 +19,10 @@ set_property(TARGET target_test PROPERTY CXX_STANDARD 17)
 
 
 if (MSVC)
+# Removing /W3 from default compile options
+    string(REGEX REPLACE "/W[3|4]" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
     target_compile_options(editor PRIVATE
-        /W4 
+        /W4
     )
     target_compile_options(target_test PRIVATE
         /W4 

@@ -5,6 +5,6 @@
 
 
 int main() {
-    Application app;
+    editor::Application app;
     app.start();
-} 
+}  

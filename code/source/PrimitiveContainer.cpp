@@ -1,33 +1,23 @@
-#pragma once
+#include "PrimitiveContainer.h"
 
-#include <string>
-#include <list>
-#include <iostream>
 
-#include "Primitives.h"
-#include "Snapshot.h"
-#include <unordered_set>
+namespace editor {
 
-class PrimitiveContainer {
-private:
-    std::list<Primitive> primList;
-    std::unordered_map<const Primitive*, typename std::list<Primitive>::iterator> primMap;
-public:
-    auto add(const Primitive& primitive) {
+    std::list<Primitive>::iterator PrimitiveContainer::add(const Primitive& primitive) {
         primList.push_back(primitive);
         auto it = primList.end();
         it--;
-        
+
         primMap[&*it] = it;
         return it;
     }
 
-    void remove(const Primitive& primitive) {
+    void PrimitiveContainer::remove(const Primitive& primitive) {
         primList.erase(primMap.at(&primitive));
         primMap.erase(&primitive);
     }
 
-    Snapshot makeSnapshot() {
+    Snapshot PrimitiveContainer::makeSnapshot() {
         Snapshot s = {};
         for (const auto& x : primList) {
             if (const Line* line = std::get_if<Line>(&x)) {
@@ -43,7 +33,7 @@ public:
 
         return s;
     }
-    void restore(const Snapshot& s) {
+    void PrimitiveContainer::restore(const Snapshot& s) {
         primList.clear();
         primMap.clear();
         primList.insert(primList.end(), s.lines.begin(), s.lines.end());
@@ -56,5 +46,4 @@ public:
         }
     }
 
-};
-
+}

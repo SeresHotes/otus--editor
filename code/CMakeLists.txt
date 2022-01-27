@@ -8,8 +8,11 @@ endif()
 project(editor VERSION 0.0.${PATCH_VERSION})
 
 
-add_executable (editor "main.cpp")
-add_executable (target_test "test.cpp")
+add_executable (editor "main.cpp" "source/SnapshotSaver.cpp" "source/PrimitiveContainer.cpp" "source/ConsoleView.cpp")
+add_executable (target_test "test.cpp" "source/SnapshotSaver.cpp" "source/PrimitiveContainer.cpp" "source/ConsoleView.cpp")
+
+target_include_directories (editor PRIVATE "ConsoleUI" "EditorCore" "EditorLogic")
+target_include_directories (target_test PRIVATE "ConsoleUI" "EditorCore" "EditorLogic")
  
 set_property(TARGET editor PROPERTY CXX_STANDARD 17)
 set_property(TARGET target_test PROPERTY CXX_STANDARD 17)
@@ -34,8 +37,8 @@ endif()
 
 
 
-find_package(GTest REQUIRED)
-target_link_libraries(target_test PRIVATE GTest::gtest GTest::gtest_main)
+#find_package(GTest REQUIRED)
+#target_link_libraries(target_test PRIVATE GTest::gtest GTest::gtest_main)
  
 enable_testing()
 #add_test(test_ip_print target_test)
@@ -48,7 +51,7 @@ install(TARGETS editor RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
-set(CPACK_PACKAGE_NAME print_ip)
+set(CPACK_PACKAGE_NAME editor)
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")

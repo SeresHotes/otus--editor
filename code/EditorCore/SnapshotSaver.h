@@ -9,6 +9,6 @@ namespace editor {
 
         void save(std::ostream& out, Snapshot s);
         Snapshot load(std::istream& in);
-    };
+    }
 
 }

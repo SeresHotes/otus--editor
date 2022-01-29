@@ -9,13 +9,13 @@ project(editor VERSION 0.0.${PATCH_VERSION})
 
 
 add_executable (editor "main.cpp" "source/SnapshotSaver.cpp" "source/PrimitiveContainer.cpp" "source/ConsoleView.cpp")
-add_executable (target_test "test.cpp" "source/SnapshotSaver.cpp" "source/PrimitiveContainer.cpp" "source/ConsoleView.cpp")
+#add_executable (target_test "test.cpp" "source/SnapshotSaver.cpp" "source/PrimitiveContainer.cpp" "source/ConsoleView.cpp")
 
 target_include_directories (editor PRIVATE "ConsoleUI" "EditorCore" "EditorLogic")
-target_include_directories (target_test PRIVATE "ConsoleUI" "EditorCore" "EditorLogic")
+#target_include_directories (target_test PRIVATE "ConsoleUI" "EditorCore" "EditorLogic")
  
 set_property(TARGET editor PROPERTY CXX_STANDARD 17)
-set_property(TARGET target_test PROPERTY CXX_STANDARD 17)
+#set_property(TARGET target_test PROPERTY CXX_STANDARD 17)
 
 
 if (MSVC)
@@ -24,16 +24,16 @@ if (MSVC)
     target_compile_options(editor PRIVATE
         /W4
     )
-    target_compile_options(target_test PRIVATE
-        /W4 
-    )
+#    target_compile_options(target_test PRIVATE
+#        /W4 
+#    )
 else ()
     target_compile_options(editor PRIVATE
         -Wall -Wextra -pedantic -Werror -pedantic-errors -Wextra-semi
     )
-    target_compile_options(target_test PRIVATE
-        -Wall -Wextra -pedantic -Werror -pedantic-errors -Wextra-semi
-    ) 
+#    target_compile_options(target_test PRIVATE
+#        -Wall -Wextra -pedantic -Werror -pedantic-errors -Wextra-semi
+#    ) 
 endif()
 
 
